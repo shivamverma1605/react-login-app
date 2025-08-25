@@ -17,15 +17,26 @@ const Login = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.username) {
+    const { username, password } = formData;
+
+    // --- Username Validation ---
+    if (!username) {
       newErrors.username = 'Username is required.';
+    } else if (!/^[A-Za-z0-9@._-]+$/.test(username)) {
+      newErrors.username = 'Invalid username format.';
     }
-    if (!formData.password) {
+
+    // --- Password Validation ---
+    if (!password) {
       newErrors.password = 'Password is required.';
-    } else if (formData.password === formData.username) {
-      newErrors.password = 'Password should not be the same as username.';
+    } else if (!/^[A-Za-z0-9@._-]+$/.test(password)) {
+      newErrors.password = 'Invalid password format.';
+    } else if (username && password === username) {
+      newErrors.password = 'Password cannot be the same as the username.';
     }
+    
     setErrors(newErrors);
+    // Return true if there are no errors, false otherwise
     return Object.keys(newErrors).length === 0;
   };
 
