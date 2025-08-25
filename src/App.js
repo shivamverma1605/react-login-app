@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/react-login-app">
       <div className="app-container">
         <Routes>
           <Route path="/" element={<Login />} />
